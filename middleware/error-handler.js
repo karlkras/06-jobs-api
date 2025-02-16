@@ -33,7 +33,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.msg = `Item with value of ${err.value} not found.`;
   }
 
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
+  //return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
   return res.status(customError.statusCode).json({ msg: customError.msg });
 };
 

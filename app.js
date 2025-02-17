@@ -7,10 +7,11 @@ import helmet from "helmet";
 import cors from "cors";
 import xss from "xss-clean";
 import rateLimit from "express-rate-limit";
-import yamljs from "yamljs";
-import swaggerUI from "swagger-ui-express";
 
-const swaggerDocument = yamljs.load("./swagger.yaml");
+// Swagger
+import swaggerUI from "swagger-ui-express";
+import YAML from "yamljs";
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 const app = express();
 dotenv.config();
@@ -38,8 +39,7 @@ app.get("/", (req, res) => {
   res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
 });
 
-app.get("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // extra packages
 
 app.use("/api/v1/auth", authRouter);
